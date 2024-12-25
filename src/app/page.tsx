@@ -8,7 +8,6 @@ export default function Home() {
     <h1>Hello!</h1>
 
     <Link href="/test">Test</Link>
-    <h1>ABC</h1>
     </header>
 
 
