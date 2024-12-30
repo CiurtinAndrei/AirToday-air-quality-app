@@ -9,8 +9,19 @@ export default function CalitateAer() {
     
     let queryCity:string|null
     
+    type AirQualityData = {
+        data: {
+          city: {
+            name: string;
+          };
+          aqi: number;
+          iaqi: {
+            [key: string]: { v: number };
+          };
+        };
+      };
 
-    const [city_info, updateInfo] = useState({})
+      const [cityInfo, updateInfo] = useState<AirQualityData | null>(null);
 
     useEffect(()=>{
 
@@ -29,14 +40,21 @@ export default function CalitateAer() {
        })
     }, [])
 
+    if(!cityInfo){
+        return(
+        <>
+        
+        <h1>In asteptare....</h1>
+        
+        </>)
+    }
 
     return (
         <>
 
         <h1> This is a test!</h1>
         <Link href="/">Return</Link>
-
-
+        <h1>Air Quality for {cityInfo.data.city.name}</h1>
         </>
         
 
