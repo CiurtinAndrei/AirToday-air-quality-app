@@ -7,7 +7,7 @@ import axios from 'axios'
 
 export default function CalitateAer() {
     
-    let queryCity:string = 'default'
+    let queryCity:string|null
     
 
     const [city_info, updateInfo] = useState({})
