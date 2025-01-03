@@ -36,11 +36,12 @@
 .select_title{
 
     font-size:70px;
+    text-align: center;
 }
 
 .city_selector {
     text-align: center;
-    font-size: 50px;
+    font-size: 30px;
     width: 100%;
     
   }
