@@ -21,7 +21,7 @@ export default function Home(){
 
     const handleSubmit = () =>{
         if (city){
-            router.push(`/calitate-aer?city=${city}`)
+            router.push(`/calitate-aer?location=${city}`)
         }
     }
 

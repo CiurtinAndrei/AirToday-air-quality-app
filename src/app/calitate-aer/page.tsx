@@ -57,7 +57,7 @@ export default function CalitateAer() {
 
     useEffect(()=>{
 
-       const queryCity:string|null = new URLSearchParams(window.location.search).get('city');
+       const queryCity:string|null = new URLSearchParams(window.location.search).get('location');
        axios.get(`https://api.waqi.info/feed/${queryCity}/?token=${process.env.NEXT_PUBLIC_API_KEY}`)
        .then((res)=>{
             console.log(res.data)
