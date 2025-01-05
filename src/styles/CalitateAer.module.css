@@ -1,6 +1,6 @@
 .header_bar {
     position: sticky;
-    top: 0; 
+    top: 0; /* Ensure it sticks to the top */
     background: #0ea2df;
     color: white;
     width: 100%;
@@ -9,8 +9,8 @@
     flex-direction: row;
     place-items: center;
     border: 1px solid #ccc;
-    z-index: 1000; 
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000; /* Ensure it's above other content */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Optional: Add shadow for visual separation */
 }
 
 .ro_flag{
@@ -35,28 +35,4 @@
     align-items: center;   
 
     
-}
-
-.select_title{
-
-    font-size:70px;
-    text-align: center;
-}
-
-.city_selector {
-    text-align: center;
-    font-size: 30px;
-    width: 100%;
-    
-  }
-
-.city_sel_wrap{
-    height: 50px;
-    overflow-y: visible;
-}
-
-.ok_button{
-    margin-top:60px;
-    font-size:40px;
-    height:60px;
 }

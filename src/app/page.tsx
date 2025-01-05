@@ -13,7 +13,7 @@ export default function Home(){
 
     const [city, selectCity] = useState<string>("")
 
-    const [datetime, setDateTime] = useState<string>("")
+    const [datetime, setDateTime] = useState<string>("...")
     
     const changeCity = (event: React.ChangeEvent<HTMLSelectElement>) => {
         selectCity(event.target.value)
@@ -53,7 +53,7 @@ export default function Home(){
             <option value="A470920">București - Sectorul 1</option>
             <option value="A109186">București - Sectorul 2</option>
             <option value="A110290">București - Sectorul 3</option>
-            <option value="A370036">București - Sectorul 4</option>
+            <option value="A109819">București - Sectorul 4</option>
             <option value="A109702">București - Sectorul 5</option>
             <option value="A109288">București - Sectorul 6</option>
             <option value="alba-iulia">Alba Iulia</option>
@@ -62,17 +62,16 @@ export default function Home(){
             <option value="baia-mare">Baia Mare</option>
             <option value="@7658"> Balotești</option>
             <option value="bistrita">Bistrița</option>
-            <option value="blaj">Blaj</option>
             <option value="botosani">Botoșani</option>
             <option value="brasov">Brașov</option>
-            <option value="buzau">Buzău</option>
-            <option value="calarasi">Călărași</option>
-            <option value="campulung-moldovenesc">Câmpulung Moldovenesc</option>
+            <option value="A237307">Buzău</option>
+            <option value="@6847">Călărași</option>
+            <option value="A403114">Câmpina</option>
+            <option value="@4163">Câmpulung</option>
             <option value="caransebes">Caransebeș</option>
             <option value="cluj">Cluj</option>
             <option value="constanta">Constanța</option>
             <option value="craiova">Craiova</option>
-            <option value="curtea-de-arges">Curtea de Argeș</option>
             <option value="deva">Deva</option>
             <option value="drobeta-turnu-severin">Drobeta-Turnu Severin</option>
             <option value="focsani">Focșani</option>
@@ -80,21 +79,21 @@ export default function Home(){
             <option value="giurgiu">Giurgiu</option>
             <option value="hunedoara">Hunedoara</option>
             <option value="iasi">Iași</option>
-            <option value="lugoj">Lugoj</option>
             <option value="mangalia">Mangalia</option>
             <option value="medgidia">Medgidia</option>
+            <option value="@4187"> Mediaș</option>
             <option value="@7652">Miercurea Ciuc</option>
             <option value="oradea">Oradea</option>
-            <option value="petrosani">Petroșani</option>
+            <option value="@4193">Petroșani</option>
             <option value="piatra-neamt">Piatra Neamț</option>
             <option value="pitesti">Pitești</option>
             <option value="ploiesti">Ploiești</option>
-            <option value="radauti">Rădăuți</option>
+            <option value="@6845">Râmnicu Sărat</option>
             <option value="ramnicu-valcea">Râmnicu Vâlcea</option>
             <option value="resita">Reșița</option>
             <option value="satu-mare">Satu Mare</option>
             <option value="sfantu-gheorghe">Sfântu Gheorghe</option>
-            <option value="sighisoara">Sighișoara</option>
+            <option value="A502816">Sighișoara</option>
             <option value="sibiu">Sibiu</option>
             <option value="slatina">Slatina</option>
             <option value="slobozia">Slobozia</option>
@@ -102,19 +101,17 @@ export default function Home(){
             <option value="targoviste">Târgoviște</option>
             <option value="targu-jiu">Târgu Jiu</option>
             <option value="targu-mures">Târgu Mureș</option>
+            <option value="tecuci">Tecuci</option>
             <option value="timisoara">Timișoara</option>
-            <option value="tulcea">Tulcea</option>
             <option value="vaslui">Vaslui</option>
-            <option value="vulcan">Vulcan</option>
             <option value="zalau">Zalău</option>
-
 
 
         </select>
 
         </div>
         
-        {city? <button className = {styles.ok_button} onClick={handleSubmit}>Confirmă</button> : <p></p>}
+        {city? <button className = {styles.ok_button} onClick={handleSubmit}>Confirmă</button> : <div></div>}
         
 
         </div>
