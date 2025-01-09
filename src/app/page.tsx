@@ -37,7 +37,7 @@ export default function Home(){
         <>
         <div className = {styles.header_bar}>
         <Image className = {styles.ro_flag} src = {ROFlag} alt="RO-flag" width={30} height={20}></Image>
-        <span className = {styles.app_title}> AirToday - calitatea aerului în România zi de zi</span>
+        <span className = {styles.app_title}>AirToday - calitatea aerului în orașele din România</span>
         <span className = {styles.date_time}> {datetime}</span>
         </div>
 
@@ -112,8 +112,9 @@ export default function Home(){
         </div>
         
         {city? <button className = {styles.ok_button} onClick={handleSubmit}>Confirmă</button> : <div></div>}
-        
-
+        <div className = {styles.chart}>
+        </div>
+   
         </div>
         </>
     );

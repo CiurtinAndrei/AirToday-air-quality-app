@@ -2,14 +2,43 @@
 
 import Link from "next/link"
 import {useState, useEffect} from 'react'
-import { Chart } from "react-google-charts";
 import axios from 'axios'
 import  styles from '../../styles/CalitateAer.module.css'
 import Image from 'next/image';
 import ROFlag from '../../styles/icons/ro-flag.png'
 
+
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+import { Line } from 'react-chartjs-2';
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
+
+
 export default function CalitateAer() {
     
+  type PollutantData = {
+    min: number[];
+    max: number[];
+    avg: number[];
+  };
+
   type AirQualityData = {
     status: string;
     data: {
@@ -61,6 +90,12 @@ export default function CalitateAer() {
       const [qualityScore, updateScore] = useState<string>("")
       const [datetime, setDateTime] = useState<string>("...")
 
+      const [dates, setDates] = useState<string[]>([]);
+      const [o3Data, setO3Data] = useState<PollutantData>({ min: [], max: [], avg: [] });
+      const [pm10Data, setPm10Data] = useState<PollutantData>({ min: [], max: [], avg: [] });
+      const [pm25Data, setPm25Data] = useState<PollutantData>({ min: [], max: [], avg: [] });
+      const [uviData, setUviData] = useState<PollutantData>({ min: [], max: [], avg: [] });
+      const [maxValues, setMaxValues] = useState<number[]>([])
 
     useEffect(() => {
         const intervalId = setInterval(() => {
@@ -76,9 +111,53 @@ export default function CalitateAer() {
        .then((res)=>{
             console.log(res.data)
             updateInfo(res.data)
-   
+
+            const max_values: number[] = [];
+            const dates: string[] = [];
+            const newO3Data: PollutantData = { min: [], max: [], avg: [] };
+            const newPm10Data: PollutantData = { min: [], max: [], avg: [] };
+            const newPm25Data: PollutantData = { min: [], max: [], avg: [] };
+            const newUviData: PollutantData = { min: [], max: [], avg: [] };
+
+
+            for (const i in res.data.data.forecast?.daily.o3){
+              newO3Data.min.push(res.data.data.forecast?.daily.o3[i].min);
+              newO3Data.max.push(res.data.data.forecast?.daily.o3[i].max);
+              newO3Data.avg.push(res.data.data.forecast?.daily.o3[i].avg);
+            }
+
+            for (const i in res.data.data.forecast?.daily.pm10){
+              newPm10Data.min.push(res.data.data.forecast?.daily.pm10[i].min);
+              newPm10Data.max.push(res.data.data.forecast?.daily.pm10[i].max);
+              newPm10Data.avg.push(res.data.data.forecast?.daily.pm10[i].avg);
+            }
+
+            for (const i in res.data.data.forecast?.daily.pm25){
+              newPm25Data.min.push(res.data.data.forecast?.daily.pm25[i].min);
+              newPm25Data.max.push(res.data.data.forecast?.daily.pm25[i].max);
+              newPm25Data.avg.push(res.data.data.forecast?.daily.pm25[i].avg);  
+            }
+
+            for (const i in res.data.data.forecast?.daily.uvi){
+              newUviData.min.push(res.data.data.forecast?.daily.uvi[i].min);
+              newUviData.max.push(res.data.data.forecast?.daily.uvi[i].max);
+              newUviData.avg.push(res.data.data.forecast?.daily.uvi[i].avg);
+              const [year, month, day] = res.data.data.forecast?.daily.uvi[i].day.split("-")
+              dates.push(`${day}.${month}.${year}`)
+            }
+
+            max_values.push(Math.max(...newO3Data.max))
+            max_values.push(Math.max(...newPm10Data.max))
+            max_values.push(Math.max(...newPm25Data.max))
+            max_values.push(Math.max(...newUviData.max))
+
+            setMaxValues(max_values)
+            setDates(dates)
+            setO3Data(newO3Data)
+            setPm10Data(newPm10Data)
+            setPm25Data(newPm25Data) 
+            setUviData(newUviData)
             
-        
             if(res.data && typeof(res.data.data) != "string"){
               
               if(res.data.data.aqi <= 50){
@@ -345,12 +424,273 @@ export default function CalitateAer() {
 
     }, [])
 
+
+    const labels = dates;
+
+    const options_o3 = {
+      responsive: true,
+      plugins: {
+        legend: {
+          display: true,
+          position: "top" as const,
+        },
+        title: {
+          display: true,
+          text: 'Ozon (µg/m³)',
+          font: {
+            size: 30, 
+          },
+        },
+      },
+      scales: {
+        x: {
+          ticks: {
+            font: {
+              size: 20,
+            },
+          },
+        },
+        y: {
+          ticks: {
+            font: {
+              size: 20,
+            },
+          },
+          min: 0, 
+          max: maxValues[0] + 5, 
+        },
+      },
+      layout: {
+        padding: {
+          left: 130,   
+          right: 130, 
+          top: 130,   
+          bottom: 130, 
+        },
+      },
+    };
+
+    const options_pm10 = {
+      responsive: true,
+      plugins: {
+        legend: {
+          display: true,
+          position: "top" as const,
+        },
+        title: {
+          display: true,
+          text: 'Partcule cu diametrul mai mic de 10 μm (µg/m³)',
+          font: {
+            size: 30, 
+          },
+        },
+      },
+      scales: {
+        x: {
+          ticks: {
+            font: {
+              size: 20,
+            },
+          },
+        },
+        y: {
+          ticks: {
+            font: {
+              size: 20,
+            },
+          },
+          min: 0, 
+          max: maxValues[1] + 5, 
+        },
+      },
+      layout: {
+        padding: {
+          left: 130,   
+          right: 130, 
+          top: 130,   
+          bottom: 130, 
+        },
+      },
+    };
+  
+    const options_pm25 = {
+      responsive: true,
+      plugins: {
+        legend: {
+          display: true,
+          position: "top" as const,
+        },
+        title: {
+          display: true,
+          text: 'Partcule cu diametrul mai mic de 2.5 μm (µg/m³)',
+          font: {
+            size: 30, 
+          },
+        },
+      },
+      scales: {
+        x: {
+          ticks: {
+            font: {
+              size: 20,
+            },
+          },
+        },
+        y: {
+          ticks: {
+            font: {
+              size: 20,
+            },
+          },
+          min: 0, 
+          max: maxValues[2] + 5, 
+        },
+      },
+      layout: {
+        padding: {
+          left: 130,   
+          right: 130, 
+          top: 130,   
+          bottom: 130, 
+        },
+      },
+    };
+
+    const options_uvi = {
+      responsive: true,
+      plugins: {
+        legend: {
+          display: true,
+          position: "top" as const,
+        },
+        title: {
+          display: true,
+          text: 'Indice radiație ultravioletă UVI',
+          font: {
+            size: 30, 
+          },
+        },
+      },
+      scales: {
+        x: {
+          ticks: {
+            font: {
+              size: 20,
+            },
+          },
+        },
+        y: {
+          ticks: {
+            font: {
+              size: 20,
+            },
+          },
+          min: 0, 
+          max: maxValues[3] + 1, 
+        },
+      },
+      layout: {
+        padding: {
+          left: 130,   
+          right: 130, 
+          top: 130,   
+          bottom: 130, 
+        },
+      },
+    };
+
+
+    const data_o3 = {
+      labels,
+      datasets: [
+        {
+          label: 'Minim',
+          data: o3Data.min,
+          borderColor: 'rgb(0, 0, 255)',
+          backgroundColor: 'rgb(0, 0, 255)',
+        },
+        {
+          label: 'Mediu',
+          data: o3Data.avg,
+          borderColor: 'rgb(230, 230, 0)',
+          backgroundColor: 'rgb(230, 230, 0)',
+        },
+        {
+          label: 'Maxim',
+          data: o3Data.max,
+          borderColor: 'rgb(255, 0, 0)',
+          backgroundColor: 'rgb(255, 0, 0)',
+        },
+      ],
+    };
+
+    const data_pm10 = {
+      labels,
+      datasets: [
+        {
+          label: 'Minim',
+          data: pm10Data.min,
+          borderColor: 'rgb(0, 0, 255)',
+          backgroundColor: 'rgb(0, 0, 255)',
+        },
+        {
+          label: 'Mediu',
+          data: pm10Data.avg,
+          borderColor: 'rgb(230, 230, 0)',
+          backgroundColor: 'rgb(230, 230, 0)',
+        },
+        {
+          label: 'Maxim',
+          data: pm10Data.max,
+          borderColor: 'rgb(255, 0, 0)',
+          backgroundColor: 'rgb(255, 0, 0)',
+        },
+      ],
+    };
+
+
+    const data_pm25 = {
+      labels,
+      datasets: [
+        {
+          label: 'Minim',
+          data: pm25Data.min,
+          borderColor: 'rgb(0, 0, 255)',
+          backgroundColor: 'rgb(0, 0, 255)',
+        },
+        {
+          label: 'Mediu',
+          data: pm25Data.avg,
+          borderColor: 'rgb(230, 230, 0)',
+          backgroundColor: 'rgb(230, 230, 0)',
+        },
+        {
+          label: 'Maxim',
+          data: pm25Data.max,
+          borderColor: 'rgb(255, 0, 0)',
+          backgroundColor: 'rgb(255, 0, 0)',
+        },
+      ],
+    };
+
+    const data_uvi = {
+      labels,
+      datasets: [
+        {
+          label: 'Maxim',
+          data: uviData.max,
+          borderColor: 'rgb(255, 0, 0)',
+          backgroundColor: 'rgb(255, 0, 0)',
+        },
+      ],
+    };
+
     if(!cityInfo){
         return(
         <>
         <div className = {styles.header_bar}>
         <Image className = {styles.ro_flag} src = {ROFlag} alt="RO-flag" width={30} height={20}></Image>
-        <span className = {styles.app_title}> AirToday - calitatea aerului în România zi de zi</span>
+        <span className = {styles.app_title}>AirToday - calitatea aerului în orașele din România</span>
         <span className = {styles.date_time}> {datetime}</span>
         </div>
 
@@ -421,26 +761,30 @@ export default function CalitateAer() {
         {cityInfo.data.iaqi['t']?.v? <h1>Temperatură: {cityInfo.data.iaqi['t']?.v} ºC</h1> : <div></div>}
 
         </div>
-          
+        
+        <hr></hr>
 
-        {cityInfo.data.forecast?<h1>Forecast soon!</h1>:<div>Această stație nu este prevăzută cu funcția de forecast.</div>}
-        <Chart
-      // Try different chart types by changing this property with one of: LineChart, BarChart, AreaChart...
-      chartType="ScatterChart"
-      data={[
-        ["Age", "Weight"],
-        [4, 16],
-        [8, 25],
-        [12, 40],
-        [16, 55],
-        [20, 70],
-      ]}
-      options={{
-        title: "Average Weight by Age",
-        backgroundColor: "whitesmoke",
-      }}
-      legendToggle
-    />
+        {cityInfo.data.forecast? 
+        <> 
+
+              <h1 className = {styles.centered_text}> Date forecast</h1>
+
+              <Line options={options_o3} data={data_o3} />
+
+              <Line options={options_pm25} data={data_pm25} />
+
+              <Line options={options_pm10} data={data_pm10} />
+
+              <Line options={options_uvi} data = {data_uvi} />
+
+  
+
+        </>
+
+        :   //ELSE
+        
+        
+        <div>Această stație nu este prevăzută cu funcția de forecast.</div>}
 
 
 
