@@ -468,10 +468,10 @@ export default function CalitateAer() {
       },
       layout: {
         padding: {
-          left: 130,   
+          left: 80,   
           right: 130, 
           top: 130,   
-          bottom: 70, 
+          bottom: 50, 
         },
       },
     };
@@ -511,10 +511,10 @@ export default function CalitateAer() {
       },
       layout: {
         padding: {
-          left: 130,   
+          left: 80,   
           right: 130, 
           top: 130,   
-          bottom: 70, 
+          bottom: 50, 
         },
       },
     };
@@ -555,10 +555,10 @@ export default function CalitateAer() {
       },
       layout: {
         padding: {
-          left: 130,   
+          left: 80,   
           right: 130, 
           top: 130,   
-          bottom: 70, 
+          bottom: 50, 
         },
       },
     };
@@ -599,10 +599,10 @@ export default function CalitateAer() {
       },
       layout: {
         padding: {
-          left: 130,   
+          left: 80,   
           right: 130, 
           top: 130,   
-          bottom: 70, 
+          bottom: 50, 
         },
       },
     };
@@ -759,7 +759,7 @@ export default function CalitateAer() {
         <thead>
         <tr>
           <th>Locația senzorului </th>
-          <td>{cityInfo.data.city.name};&nbsp; lat: {cityInfo.data.city.geo[0]};&nbsp; long: {cityInfo.data.city.geo[1]}</td>
+          <td>{cityInfo.data.city.name}&nbsp; <p>lat: {cityInfo.data.city.geo[0]}&nbsp;</p> <p>long: {cityInfo.data.city.geo[1]}</p></td>
         </tr>
 
         <tr>

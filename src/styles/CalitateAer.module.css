@@ -69,12 +69,12 @@
     margin-top:5%;
     margin-left:5%;
     margin-right:5%;
-    margin-bottom:8%;
+    margin-bottom:7%;
     display: flex;
     justify-content:center;
     overflow-x: auto;
     overflow-y:scroll;
-    max-height:43.8vh;
+    max-height:48.5vh;
     
   }
   
@@ -89,7 +89,7 @@
   .table td {
     padding: 16px;
     text-align: left;
-    font-size: 20px;
+    font-size: 25px;
     width: 20%;
   }
   
@@ -123,7 +123,7 @@
 
   .chart_container{
 
-    margin-top:5%;
+    margin-top:2%;
     display:flex;
     flex-direction:column;
     justify-content:center;
