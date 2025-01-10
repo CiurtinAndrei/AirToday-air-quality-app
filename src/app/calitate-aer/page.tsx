@@ -47,13 +47,13 @@ export default function CalitateAer() {
       attributions: {
         url: string;
         name: string;
-        logo?: string; // Optional property
+        logo?: string; 
       }[];
       city: {
         geo: [number, number];
         name: string;
         url: string;
-        location?: string; // Optional property
+        location?: string; 
       };
       dominentpol: string;
       iaqi: {
@@ -91,11 +91,12 @@ export default function CalitateAer() {
       const [datetime, setDateTime] = useState<string>("...")
 
       const [dates, setDates] = useState<string[]>([]);
-      const [o3Data, setO3Data] = useState<PollutantData>({ min: [], max: [], avg: [] });
-      const [pm10Data, setPm10Data] = useState<PollutantData>({ min: [], max: [], avg: [] });
-      const [pm25Data, setPm25Data] = useState<PollutantData>({ min: [], max: [], avg: [] });
-      const [uviData, setUviData] = useState<PollutantData>({ min: [], max: [], avg: [] });
+      const [o3Data, setO3Data] = useState<PollutantData>({ min: [], max: [], avg: [] })
+      const [pm10Data, setPm10Data] = useState<PollutantData>({ min: [], max: [], avg: [] })
+      const [pm25Data, setPm25Data] = useState<PollutantData>({ min: [], max: [], avg: [] })
+      const [uviData, setUviData] = useState<PollutantData>({ min: [], max: [], avg: [] })
       const [maxValues, setMaxValues] = useState<number[]>([])
+      const [currentEuDate, setCurrentEuDate] = useState<string>('')
 
     useEffect(() => {
         const intervalId = setInterval(() => {
@@ -112,6 +113,7 @@ export default function CalitateAer() {
             console.log(res.data)
             updateInfo(res.data)
 
+            let current_date:string = ''
             const max_values: number[] = [];
             const dates: string[] = [];
             const newO3Data: PollutantData = { min: [], max: [], avg: [] };
@@ -143,7 +145,11 @@ export default function CalitateAer() {
               newUviData.max.push(res.data.data.forecast?.daily.uvi[i].max);
               newUviData.avg.push(res.data.data.forecast?.daily.uvi[i].avg);
               const [year, month, day] = res.data.data.forecast?.daily.uvi[i].day.split("-")
-              dates.push(`${day}.${month}.${year}`)
+              let actual_date = `${day}/${month}/${year}`
+              dates.push(actual_date)
+
+
+
             }
 
             max_values.push(Math.max(...newO3Data.max))
@@ -161,22 +167,22 @@ export default function CalitateAer() {
             if(res.data && typeof(res.data.data) != "string"){
               
               if(res.data.data.aqi <= 50){
-                updateScore("Minim")
+                updateScore("minim")
               }
               else if(res.data.data.aqi >= 51 && res.data.data.aqi <= 100){
-                updateScore("Moderat")
+                updateScore("moderat")
               }
               else if(res.data.data.aqi >= 101 && res.data.data.aqi <= 150){
-                updateScore("Nesănătos pentru grupurile sensibile")
+                updateScore("nesănătos pentru grupurile sensibile")
               }
               else if(res.data.data.aqi >= 151 && res.data.data.aqi <= 200){
-                updateScore("Nesănătos")
+                updateScore("nesănătos")
               }
               else if(res.data.data.aqi >= 201 && res.data.data.aqi <= 300){
-                updateScore("Foarte nesănătos")
+                updateScore("foarte nesănătos")
               }
               else if(res.data.data.aqi >= 301){
-                updateScore("Periculos")
+                updateScore("periculos")
               }
 
 
@@ -465,7 +471,7 @@ export default function CalitateAer() {
           left: 130,   
           right: 130, 
           top: 130,   
-          bottom: 130, 
+          bottom: 70, 
         },
       },
     };
@@ -508,7 +514,7 @@ export default function CalitateAer() {
           left: 130,   
           right: 130, 
           top: 130,   
-          bottom: 130, 
+          bottom: 70, 
         },
       },
     };
@@ -531,6 +537,7 @@ export default function CalitateAer() {
       scales: {
         x: {
           ticks: {
+
             font: {
               size: 20,
             },
@@ -551,7 +558,7 @@ export default function CalitateAer() {
           left: 130,   
           right: 130, 
           top: 130,   
-          bottom: 130, 
+          bottom: 70, 
         },
       },
     };
@@ -574,6 +581,7 @@ export default function CalitateAer() {
       scales: {
         x: {
           ticks: {
+
             font: {
               size: 20,
             },
@@ -594,7 +602,7 @@ export default function CalitateAer() {
           left: 130,   
           right: 130, 
           top: 130,   
-          bottom: 130, 
+          bottom: 70, 
         },
       },
     };
@@ -731,43 +739,175 @@ export default function CalitateAer() {
 
     return (
         <>
-
+          
         <div className = {styles.header_bar}>
         <Image className = {styles.ro_flag} src = {ROFlag} alt="RO-flag" width={30} height={20}></Image>
-        <span className = {styles.app_title}> AirToday - calitatea aerului în România zi de zi</span>
+        <span className = {styles.app_title}> AirToday - calitatea aerului în orașele din România</span>
+        <Link className = {styles.app_title} href="/">Înapoi la pagina principală</Link>
         <span className = {styles.date_time}> {datetime}</span>
         </div>
-
+        
         <div className = {styles.page_container}>
+        <h1> Informații despre Calitatea Aerului - {cityName} </h1>
 
-        <h1> Calitatea aerului pentru {cityName} </h1>
-        <Link href="/">Return</Link>
-        <h1>Date capturate de senzorul: {cityInfo.data.idx}</h1>
-        <h1>Adresa senzor: {cityInfo.data.city.name}</h1>
-        <h1>Coordonate: {cityInfo.data.city.geo[0]}  {cityInfo.data.city.geo[1]}</h1>
-        <h1>Data si ora inregistrarii datelor: {cityInfo.data.time['s']}</h1>
-        <h1>Scor AQI: {cityInfo.data.aqi} - Nivel de poluare: {qualityScore} </h1>
-        <h1>Poluant dominant: {cityInfo.data.dominentpol}</h1>
-        <h1>{cityInfo.data.forecast?.daily.pm10[0].avg}</h1>
-        {cityInfo.data.iaqi['dew']?.v? <h1>Temperatura punctului de rouă: {cityInfo.data.iaqi['dew']?.v} ºC</h1> : <div></div>}
-        {cityInfo.data.iaqi['h']?.v? <h1>Umiditate: {cityInfo.data.iaqi['h']?.v}%</h1> : <div></div>}
-        {cityInfo.data.iaqi['p']?.v? <h1>Presiune atmosferică: {cityInfo.data.iaqi['p']?.v} hPa</h1> : <div></div>}
-        {cityInfo.data.iaqi['w']?.v? <h1>Viteza vântului: {cityInfo.data.iaqi['w']?.v} m/s</h1>: <div></div>}
-        {cityInfo.data.iaqi['o3']?.v? <h1>Cantitate de ozon (O3): {cityInfo.data.iaqi['o3']?.v} µg/m³</h1> : <div></div>}
-        {cityInfo.data.iaqi['no2']?.v? <h1>Cantitate de dioxid de azot (NO2): {cityInfo.data.iaqi['no2']?.v} µg/m³</h1> : <div></div>}
-        {cityInfo.data.iaqi['pm1']?.v? <h1>Cantitate de particule PM1: {cityInfo.data.iaqi['pm1']?.v} µg/m³</h1> : <div></div>}
-        {cityInfo.data.iaqi['pm10']?.v? <h1>Cantitate de particule PM10: {cityInfo.data.iaqi['pm10']?.v} µg/m³</h1> : <div></div>}  
-        {cityInfo.data.iaqi['pm25']?.v? <h1>Cantitate de particule PM25: {cityInfo.data.iaqi['pm25']?.v} µg/m³</h1> : <div></div>}  
-        {cityInfo.data.iaqi['t']?.v? <h1>Temperatură: {cityInfo.data.iaqi['t']?.v} ºC</h1> : <div></div>}
+
+        </div>
+
+        <div className = {styles.table_container}>
+
+        <table className = {styles.table}>
+        <thead>
+        <tr>
+          <th>Locația senzorului </th>
+          <td>{cityInfo.data.city.name};&nbsp; lat: {cityInfo.data.city.geo[0]};&nbsp; long: {cityInfo.data.city.geo[1]}</td>
+        </tr>
+
+        <tr>
+          <th>Data și ora înregistrării datelor</th>
+          <td>{cityInfo.data.time['s']}</td>
+        </tr>
+
+        <tr>
+          <th>Scor AQI</th>
+          <td>{cityInfo.data.aqi} - Nivel de poluare {qualityScore}</td>
+        </tr>
+
+        </thead>
+
+        <tbody>
+
+        {cityInfo.data.dominentpol? 
+
+        <tr>
+          <th>Poluant dominant:</th>
+          <td>{cityInfo.data.dominentpol}</td>
+        </tr>
+
+
+        : 
+        <></>}
+
+        {cityInfo.data.iaqi['o3']?.v? 
+
+        <tr>
+        <th>Ozon (o3)</th>
+        <td>{cityInfo.data.iaqi['o3']?.v} µg/m³</td>
+        </tr>
+
+        : 
+        <></>}
+
+        {cityInfo.data.iaqi['no2']?.v?
+
+        <tr>
+        <th>Dioxid de azot (no2)</th>
+        <td>{cityInfo.data.iaqi['no2']?.v} µg/m³</td>
+        </tr>
+
+        : 
+        <></>}
+
+        {cityInfo.data.iaqi['pm1']?.v?
+
+        <tr>
+        <th>Particule cu diametrul mai mic de 1 µm (pm1) </th>
+        <td>{cityInfo.data.iaqi['pm1']?.v} µg/m³</td>
+        </tr>
+
+        : 
+        <></>}
+
+        {cityInfo.data.iaqi['pm25']?.v? 
+
+        <tr>
+        <th>Particule cu diametrul mai mic de 2.5 µm (pm25)</th>
+        <td>{cityInfo.data.iaqi['pm25']?.v} µg/m³</td>
+        </tr>
+
+        : 
+        <></>}
+
+        {cityInfo.data.iaqi['pm10']?.v?
+
+        <tr>
+        <th>Particule cu diametrul mai mic de 10 µm (pm10)</th>
+        <td>{cityInfo.data.iaqi['pm10']?.v} µg/m³</td>
+        </tr>
+
+        : 
+        <></>}
+
+
+
+
+        {cityInfo.data.iaqi['dew']?.v? 
+
+        <tr>
+        <th>Temperatura punctului de rouă</th>
+        <td>{cityInfo.data.iaqi['dew']?.v} ºC</td>
+        </tr>
+
+        : 
+        <></>}
+
+
+        {cityInfo.data.iaqi['t']?.v?
+
+        <tr>
+        <th>Temperatura aerului</th>
+        <td>{cityInfo.data.iaqi['t']?.v} ºC</td>
+        </tr>
+
+        : 
+        <></>}
+
+
+        {cityInfo.data.iaqi['h']?.v?
+
+        <tr>
+        <th>Umiditate</th>
+        <td>{cityInfo.data.iaqi['h']?.v}%</td>
+        </tr>
+
+        : 
+        <></>}
+
+        {cityInfo.data.iaqi['p']?.v?
+
+        <tr>
+        <th>Presiune atmosferică</th>
+        <td>{cityInfo.data.iaqi['p']?.v} hPa</td>
+        </tr>
+
+        : 
+        <></>}
+
+        {cityInfo.data.iaqi['w']?.v?
+
+        <tr>
+        <th>Viteza vântului</th>
+        <td>{cityInfo.data.iaqi['w']?.v} m/s</td>
+        </tr>
+
+        : 
+        <></>}
+
+
+
+        </tbody>
+
+        </table>
+
 
         </div>
         
-        <hr></hr>
+        <hr className = {styles.section_line}></hr>
 
         {cityInfo.data.forecast? 
         <> 
+              <div className = {styles.chart_container}>
 
-              <h1 className = {styles.centered_text}> Date forecast</h1>
+              <h1 className = {styles.chart_section_title}> Previziuni pentru poluanți</h1>
 
               <Line options={options_o3} data={data_o3} />
 
@@ -777,6 +917,9 @@ export default function CalitateAer() {
 
               <Line options={options_uvi} data = {data_uvi} />
 
+              </div>
+
+
   
 
         </>
@@ -784,7 +927,7 @@ export default function CalitateAer() {
         :   //ELSE
         
         
-        <div>Această stație nu este prevăzută cu funcția de forecast.</div>}
+        <div className = {styles.no_chart}>Această stație nu este prevăzută cu funcția de forecast.</div>}
 
 
 

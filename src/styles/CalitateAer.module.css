@@ -1,6 +1,6 @@
 
 .header_bar {
-    position: sticky;
+    position: fixed;
     top: 0; /* Ensure it sticks to the top */
     background: #0ea2df;
     color: white;
@@ -24,11 +24,11 @@
 
 .date_time{
     margin-left: auto;
-    margin-right:10px;
+    margin-right:30px;
 }
 
 .page_container{
-    margin-top:20px;
+    margin-top:110px;
     display: flex;
     left:50%;
     flex-direction:column;
@@ -38,11 +38,95 @@
     
 }
 
-.centered_text{
+.chart_section_title{
 
     margin-top:50px;
     justify-content: center;
     align-items: center;
     display:flex;
+    font-size:50px;
 
 }
+
+.no_chart{
+
+    justify-content: center;
+    align-items: center;
+    display:flex;
+
+}
+
+.section_line{
+    border: none;
+    height: 4px;
+    background: linear-gradient(to right, #3abef7, #024870); 
+    margin: 20px 0;
+}
+
+
+
+.table_container {
+    margin-top:5%;
+    margin-left:5%;
+    margin-right:5%;
+    margin-bottom:8%;
+    display: flex;
+    justify-content:center;
+    overflow-x: auto;
+    overflow-y:scroll;
+    max-height:43.8vh;
+    
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .table th,
+  .table td {
+    padding: 16px;
+    text-align: left;
+    font-size: 20px;
+    width: 20%;
+  }
+  
+  .table th {
+    background-color: #48a9cf;
+    color: white;
+    font-weight: bold;
+  }
+  
+  .table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .table td {
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .table td,
+  .table th {
+    border-right: 1px solid #ddd;
+  }
+  
+  .table td:last-child,
+  .table th:last-child {
+    border-right: none;
+  }
+
+  .chart_container{
+
+    margin-top:5%;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+  }

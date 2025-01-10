@@ -1,5 +1,5 @@
 .header_bar {
-    position: sticky;
+    position: fixed;
     top: 0; 
     background: #0ea2df;
     color: white;
@@ -23,11 +23,11 @@
 
 .date_time{
     margin-left: auto;
-    margin-right:10px;
+    margin-right:30px;
 }
 
 .page_container{
-    margin-top:20px;
+    margin-top:5%;
     display: flex;
     left:50%;
     flex-direction:column;
@@ -39,13 +39,13 @@
 
 .select_title{
 
-    font-size:70px;
+    font-size:90px;
     text-align: center;
 }
 
 .city_selector {
     text-align: center;
-    font-size: 30px;
+    font-size: 40px;
     width: 100%;
     
   }
