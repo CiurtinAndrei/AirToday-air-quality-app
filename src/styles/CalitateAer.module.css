@@ -1,7 +1,7 @@
 
 .header_bar {
     position: fixed;
-    top: 0; /* Ensure it sticks to the top */
+    top: 0;
     background: #0ea2df;
     color: white;
     width: 100%;
@@ -10,8 +10,9 @@
     flex-direction: row;
     place-items: center;
     border: 1px solid #ccc;
-    z-index: 1000; /* Ensure it's above other content */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Optional: Add shadow for visual separation */
+    z-index: 1000; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+    font-size:1vw;
 }
 
 .ro_flag{
@@ -28,7 +29,7 @@
 }
 
 .page_container{
-    margin-top:110px;
+    margin-top:9vh;
     display: flex;
     left:50%;
     flex-direction:column;
@@ -40,11 +41,11 @@
 
 .chart_section_title{
 
-    margin-top:50px;
+    margin-top:5vh;
     justify-content: center;
     align-items: center;
     display:flex;
-    font-size:50px;
+    font-size:3vw;
 
 }
 
@@ -88,7 +89,7 @@
   
   table.smallFontTable th,
   table.smallFontTable td {
-    font-size: 18px; 
+    font-size: 1vw; 
     border: 0px;
   }
   
@@ -97,7 +98,7 @@
   .table td {
     padding: 16px;
     text-align: left;
-    font-size: 25px; 
+    font-size: 1.4vw; 
     width: 20%;
   }
   

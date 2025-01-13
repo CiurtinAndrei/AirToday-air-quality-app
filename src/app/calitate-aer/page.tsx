@@ -96,7 +96,7 @@ export default function CalitateAer() {
       const [pm25Data, setPm25Data] = useState<PollutantData>({ min: [], max: [], avg: [] })
       const [uviData, setUviData] = useState<PollutantData>({ min: [], max: [], avg: [] })
       const [maxValues, setMaxValues] = useState<number[]>([])
-      const [currentEuDate, setCurrentEuDate] = useState<string>('')
+      const [formDT, formatDateTime] = useState<string>('')
 
       const [isModalOpen, updateModal] = useState(false);
 
@@ -131,7 +131,13 @@ export default function CalitateAer() {
             console.log(res.data)
             updateInfo(res.data)
 
-            let current_date:string = ''
+            const[fdate, ftime] = res.data.data.time['s'].split(' ')
+            const [y, m, d] = fdate.split('-')
+            const rec_date = `${d}/${m}/${y}`
+            const formatted_datetime = rec_date + ' ' + ftime
+
+            formatDateTime(formatted_datetime)
+
             const max_values: number[] = [];
             const dates: string[] = [];
             const newO3Data: PollutantData = { min: [], max: [], avg: [] };
@@ -163,7 +169,7 @@ export default function CalitateAer() {
               newUviData.max.push(res.data.data.forecast?.daily.uvi[i].max);
               newUviData.avg.push(res.data.data.forecast?.daily.uvi[i].avg);
               const [year, month, day] = res.data.data.forecast?.daily.uvi[i].day.split("-")
-              let actual_date = `${day}/${month}/${year}`
+              const actual_date = `${day}/${month}/${year}`
               dates.push(actual_date)
 
 
@@ -488,7 +494,7 @@ export default function CalitateAer() {
         padding: {
           left: 80,   
           right: 130, 
-          top: 130,   
+          top: 90,   
           bottom: 50, 
         },
       },
@@ -531,7 +537,7 @@ export default function CalitateAer() {
         padding: {
           left: 80,   
           right: 130, 
-          top: 130,   
+          top: 110,   
           bottom: 50, 
         },
       },
@@ -575,7 +581,7 @@ export default function CalitateAer() {
         padding: {
           left: 80,   
           right: 130, 
-          top: 130,   
+          top: 110,   
           bottom: 50, 
         },
       },
@@ -619,7 +625,7 @@ export default function CalitateAer() {
         padding: {
           left: 80,   
           right: 130, 
-          top: 130,   
+          top: 110,   
           bottom: 50, 
         },
       },
@@ -782,7 +788,7 @@ export default function CalitateAer() {
 
         <tr>
           <th>Data și ora înregistrării datelor</th>
-          <td>{cityInfo.data.time['s']}</td>
+          <td>{formDT}</td>
         </tr>
 
         <tr>
