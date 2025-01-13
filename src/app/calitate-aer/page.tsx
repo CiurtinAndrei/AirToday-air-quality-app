@@ -509,7 +509,7 @@ export default function CalitateAer() {
         },
         title: {
           display: true,
-          text: 'Partcule cu diametrul mai mic de 10 μm (µg/m³)',
+          text: 'Particule cu diametrul mai mic de 10 μm (µg/m³)',
           font: {
             size: 30, 
           },
@@ -552,7 +552,7 @@ export default function CalitateAer() {
         },
         title: {
           display: true,
-          text: 'Partcule cu diametrul mai mic de 2.5 μm (µg/m³)',
+          text: 'Particule cu diametrul mai mic de 2.5 μm (µg/m³)',
           font: {
             size: 30, 
           },
@@ -909,7 +909,7 @@ export default function CalitateAer() {
             
             </div>
           </th>
-
+          
           <td>{cityInfo.data.aqi} - Nivel de poluare {qualityScore}</td>
         </tr>
 

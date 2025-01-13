@@ -69,7 +69,7 @@ export default function Home(){
             <option value="A403114">Câmpina</option>
             <option value="@4163">Câmpulung</option>
             <option value="caransebes">Caransebeș</option>
-            <option value="cluj">Cluj</option>
+            <option value="cluj">Cluj-Napoca</option>
             <option value="constanta">Constanța</option>
             <option value="craiova">Craiova</option>
             <option value="deva">Deva</option>

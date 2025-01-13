@@ -28,7 +28,7 @@
 }
 
 .page_container{
-    margin-top:5%;
+    margin-top:7vh;
     display: flex;
     left:50%;
     flex-direction:column;
