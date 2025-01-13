@@ -6,7 +6,7 @@ import axios from 'axios'
 import  styles from '../../styles/CalitateAer.module.css'
 import Image from 'next/image';
 import ROFlag from '../../styles/icons/ro-flag.png'
-
+import Modal from "./Modal";
 
 import {
   Chart as ChartJS,
@@ -97,6 +97,24 @@ export default function CalitateAer() {
       const [uviData, setUviData] = useState<PollutantData>({ min: [], max: [], avg: [] })
       const [maxValues, setMaxValues] = useState<number[]>([])
       const [currentEuDate, setCurrentEuDate] = useState<string>('')
+
+      const [isModalOpen, updateModal] = useState(false);
+
+      useEffect(() => {
+        if (isModalOpen) {
+          document.body.style.overflow = "hidden"; 
+        } else {
+          document.body.style.overflow = "auto"; 
+        }
+    
+
+        return () => {
+          document.body.style.overflow = "auto";
+        };
+      }, [isModalOpen]); 
+    
+
+
 
     useEffect(() => {
         const intervalId = setInterval(() => {
@@ -768,7 +786,124 @@ export default function CalitateAer() {
         </tr>
 
         <tr>
-          <th>Scor AQI</th>
+          <th> 
+            <div className = {styles.aqi_score}>
+            
+               Scor AQI    
+            <button onClick={() => updateModal(true)} className = {styles.open_modal_btn}>
+                ?
+            </button>
+
+            <Modal isOpen={isModalOpen} onClose={() => updateModal(false)}>
+              <div className = {styles.aqi_score} style = {{marginLeft: "100px"}}>
+
+
+                  Scala AQI definită de standardul US-EPA 2016
+
+                  <button onClick={() => updateModal(false)} style={{ padding: "10px 20px", marginLeft: 'auto', marginRight: '10px'}} className = {styles.open_modal_btn}>
+                  X
+                  </button>
+
+              </div>
+              <div className = {`${styles.table_container}`}>
+
+
+
+              <table className = {`${styles.table} ${styles.smallFontTable}`} style={{ fontSize: '12px' }} >
+
+                <thead>
+
+                  <tr>
+
+                    <th> Interval AQI </th>
+                    <th> Nivel de poluare</th>
+                    <th> Descriere</th>
+
+                  </tr>
+                
+                </thead>
+
+
+                <tbody>
+
+                  <tr>
+
+                  <td style = {{backgroundColor: '#80ff26'}}> 0 - 50 </td>
+                  <td> Minim </td>
+                  <td> Calitatea aerului este satisfăcătoare și poluanții nu reprezintă niciun risc.</td>
+
+                  </tr>
+
+                  <tr>
+
+                  <td style = {{backgroundColor: '#fff126'}}> 51 - 100 </td>
+                  <td> Moderat </td>
+                  <td> Calitatea aerului este acceptabilă. Unii poluanți pot reprezenta un risc pentru acele persoane care sunt 
+                       neobișnuit de sensibile la factorii de mediu.
+                  </td>
+
+                  </tr>
+
+                  
+                  <tr>
+
+                  <td style = {{backgroundColor: '#ffbe26'}}> 101 - 150 </td>
+                  <td> Nesănătos pentru grupurile sensibile </td>
+                  <td> Membrii grupurilor sensibile pot fi afectați negativ. Este improbabil ca publicul larg să fie afectat.
+                  </td>
+
+                  </tr>
+
+                  
+                  <tr>
+
+                  <td style = {{backgroundColor: '#ff9a26'}}> 151-200 </td>
+                  <td> Nesănătos </td>
+                  <td> 
+                      Poluarea va produce efecte asupra sănătății publicului general. Membrii grupurilor sensibile 
+                      pot suferi efecte mai grave asupra sănătății.
+                  </td>
+  
+
+                  </tr>
+
+                  
+                  <tr>
+
+                  <td style = {{backgroundColor: '#ff6326'}}> 201-300 </td>
+                  <td> Foarte Nesănătos </td>
+                  <td> 
+                    Sunt necesare avertismente privind condițiile de mediu. Întreaga polulație este posibil să fie afectată.
+                  </td>
+
+                  </tr>
+
+                  <tr>
+
+                  <td style = {{backgroundColor: '#ff3c26'}}> 300+ </td>
+                  <td> Periculos </td>
+                  <td> Alertă de sănătate. Întreaga polpulație va suferi efecte grave asupra sănătății.
+                  </td>
+            
+
+                  </tr>
+
+                </tbody>
+                
+
+              </table>
+
+              </div>
+
+
+
+            </Modal>
+
+
+            
+            </div>
+          </th>
+
           <td>{cityInfo.data.aqi} - Nivel de poluare {qualityScore}</td>
         </tr>
 

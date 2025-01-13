@@ -66,7 +66,7 @@
 
 
 .table_container {
-    margin-top:5%;
+    margin-top:4%;
     margin-left:5%;
     margin-right:5%;
     margin-bottom:7%;
@@ -74,7 +74,7 @@
     justify-content:center;
     overflow-x: auto;
     overflow-y:scroll;
-    max-height:48.5vh;
+    max-height:50vh;
     
   }
   
@@ -84,12 +84,20 @@
     background-color: #fff;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   }
+
   
+  table.smallFontTable th,
+  table.smallFontTable td {
+    font-size: 18px; 
+    border: 0px;
+  }
+  
+
   .table th,
   .table td {
     padding: 16px;
     text-align: left;
-    font-size: 25px;
+    font-size: 25px; 
     width: 20%;
   }
   
@@ -130,3 +138,43 @@
     align-items:center;
 
   }
+
+
+  .open_modal_btn {
+    width: 40px;
+    height: 40px;
+    background-color: #2285f7;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 18px;
+    color: white; 
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin-left: 20px;
+  }
+  
+  .open_modal_btn:hover {
+    background-color: #005bb5; 
+    transform: scale(1.1); 
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .open_modal_btn:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  }
+  
+.aqi_score{
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.inside_modal{
+  color:black;
+}
