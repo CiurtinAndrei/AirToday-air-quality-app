@@ -97,6 +97,7 @@ export default function CalitateAer() {
       const [uviData, setUviData] = useState<PollutantData>({ min: [], max: [], avg: [] })
       const [maxValues, setMaxValues] = useState<number[]>([])
       const [formDT, formatDateTime] = useState<string>('')
+      const [polColor, setPolColor] = useState<string>('')
 
       const [isModalOpen, updateModal] = useState(false);
 
@@ -192,21 +193,27 @@ export default function CalitateAer() {
               
               if(res.data.data.aqi <= 50){
                 updateScore("minim")
+                setPolColor('#80ff26')
               }
               else if(res.data.data.aqi >= 51 && res.data.data.aqi <= 100){
                 updateScore("moderat")
+                setPolColor('#fff126')
               }
               else if(res.data.data.aqi >= 101 && res.data.data.aqi <= 150){
                 updateScore("nesănătos pentru grupurile sensibile")
+                setPolColor('#ffbe26')
               }
               else if(res.data.data.aqi >= 151 && res.data.data.aqi <= 200){
                 updateScore("nesănătos")
+                setPolColor('#ff9a26')
               }
               else if(res.data.data.aqi >= 201 && res.data.data.aqi <= 300){
                 updateScore("foarte nesănătos")
+                setPolColor('#ff6326')
               }
               else if(res.data.data.aqi >= 301){
                 updateScore("periculos")
+                setPolColor('#ff3c26')
               }
 
 
@@ -910,7 +917,7 @@ export default function CalitateAer() {
             </div>
           </th>
           
-          <td>{cityInfo.data.aqi} - Nivel de poluare {qualityScore}</td>
+          <td style = {{backgroundColor:polColor}}>{cityInfo.data.aqi} - Nivel de poluare {qualityScore}</td>
         </tr>
 
         </thead>

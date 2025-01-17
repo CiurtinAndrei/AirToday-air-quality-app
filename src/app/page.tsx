@@ -14,7 +14,7 @@ export default function Home(){
     const [city, selectCity] = useState<string>("")
 
     const [datetime, setDateTime] = useState<string>("...")
-    
+
     const changeCity = (event: React.ChangeEvent<HTMLSelectElement>) => {
         selectCity(event.target.value)
     }
