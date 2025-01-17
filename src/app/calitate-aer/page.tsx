@@ -193,27 +193,27 @@ export default function CalitateAer() {
               
               if(res.data.data.aqi <= 50){
                 updateScore("minim")
-                setPolColor('#80ff26')
+                setPolColor('#00E400')
               }
               else if(res.data.data.aqi >= 51 && res.data.data.aqi <= 100){
                 updateScore("moderat")
-                setPolColor('#fff126')
+                setPolColor('#FFFF00')
               }
               else if(res.data.data.aqi >= 101 && res.data.data.aqi <= 150){
                 updateScore("nesănătos pentru grupurile sensibile")
-                setPolColor('#ffbe26')
+                setPolColor('#FF7E00')
               }
               else if(res.data.data.aqi >= 151 && res.data.data.aqi <= 200){
                 updateScore("nesănătos")
-                setPolColor('#ff9a26')
+                setPolColor('#FF0000')
               }
               else if(res.data.data.aqi >= 201 && res.data.data.aqi <= 300){
                 updateScore("foarte nesănătos")
-                setPolColor('#ff6326')
+                setPolColor('#bd005e')
               }
               else if(res.data.data.aqi >= 301){
                 updateScore("periculos")
-                setPolColor('#ff3c26')
+                setPolColor('#ab0231')
               }
 
 
@@ -841,7 +841,7 @@ export default function CalitateAer() {
 
                   <tr>
 
-                  <td style = {{backgroundColor: '#80ff26'}}> 0 - 50 </td>
+                  <td style = {{backgroundColor: '#00E400'}}> 0 - 50 </td>
                   <td> Minim </td>
                   <td> Calitatea aerului este satisfăcătoare și poluanții nu reprezintă niciun risc.</td>
 
@@ -849,7 +849,7 @@ export default function CalitateAer() {
 
                   <tr>
 
-                  <td style = {{backgroundColor: '#fff126'}}> 51 - 100 </td>
+                  <td style = {{backgroundColor: '#FFFF00'}}> 51 - 100 </td>
                   <td> Moderat </td>
                   <td> Calitatea aerului este acceptabilă. Unii poluanți pot reprezenta un risc pentru acele persoane care sunt 
                        neobișnuit de sensibile la factorii de mediu.
@@ -860,7 +860,7 @@ export default function CalitateAer() {
                   
                   <tr>
 
-                  <td style = {{backgroundColor: '#ffbe26'}}> 101 - 150 </td>
+                  <td style = {{backgroundColor: '#FF7E00'}}> 101 - 150 </td>
                   <td> Nesănătos pentru grupurile sensibile </td>
                   <td> Membrii grupurilor sensibile pot fi afectați negativ. Este improbabil ca publicul larg să fie afectat.
                   </td>
@@ -870,7 +870,7 @@ export default function CalitateAer() {
                   
                   <tr>
 
-                  <td style = {{backgroundColor: '#ff9a26'}}> 151-200 </td>
+                  <td style = {{backgroundColor: '#FF0000'}}> 151-200 </td>
                   <td> Nesănătos </td>
                   <td> 
                       Poluarea va produce efecte asupra sănătății publicului general. Membrii grupurilor sensibile 
@@ -883,7 +883,7 @@ export default function CalitateAer() {
                   
                   <tr>
 
-                  <td style = {{backgroundColor: '#ff6326'}}> 201-300 </td>
+                  <td style = {{backgroundColor: '#bd005e'}}> 201-300 </td>
                   <td> Foarte Nesănătos </td>
                   <td> 
                     Sunt necesare avertismente privind condițiile de mediu. Întreaga polulație este posibil să fie afectată.
@@ -893,9 +893,9 @@ export default function CalitateAer() {
 
                   <tr>
 
-                  <td style = {{backgroundColor: '#ff3c26'}}> 300+ </td>
+                  <td style = {{backgroundColor: '#ab0231'}}> 300+ </td>
                   <td> Periculos </td>
-                  <td> Alertă de sănătate. Întreaga polpulație va suferi efecte grave asupra sănătății.
+                  <td> Alertă de sănătate. Întreaga populație va suferi efecte grave asupra sănătății.
                   </td>
             
 
