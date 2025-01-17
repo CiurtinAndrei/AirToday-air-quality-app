@@ -843,7 +843,7 @@ export default function CalitateAer() {
 
                   <td style = {{backgroundColor: '#00E400'}}> 0 - 50 </td>
                   <td> Minim </td>
-                  <td> Calitatea aerului este satisfăcătoare și poluanții nu reprezintă niciun risc.</td>
+                  <td> Calitatea aerului este satisfăcătoare și poluanții nu reprezintă niciun risc</td>
 
                   </tr>
 
@@ -852,7 +852,7 @@ export default function CalitateAer() {
                   <td style = {{backgroundColor: '#FFFF00'}}> 51 - 100 </td>
                   <td> Moderat </td>
                   <td> Calitatea aerului este acceptabilă. Unii poluanți pot reprezenta un risc pentru acele persoane care sunt 
-                       neobișnuit de sensibile la factorii de mediu.
+                       neobișnuit de sensibile la factorii de mediu
                   </td>
 
                   </tr>
@@ -862,7 +862,7 @@ export default function CalitateAer() {
 
                   <td style = {{backgroundColor: '#FF7E00'}}> 101 - 150 </td>
                   <td> Nesănătos pentru grupurile sensibile </td>
-                  <td> Membrii grupurilor sensibile pot fi afectați negativ. Este improbabil ca publicul larg să fie afectat.
+                  <td> Membrii grupurilor sensibile pot fi afectați negativ. Este improbabil ca publicul larg să fie afectat
                   </td>
 
                   </tr>
@@ -886,7 +886,7 @@ export default function CalitateAer() {
                   <td style = {{backgroundColor: '#bd005e'}}> 201-300 </td>
                   <td> Foarte Nesănătos </td>
                   <td> 
-                    Sunt necesare avertismente privind condițiile de mediu. Întreaga polulație este posibil să fie afectată.
+                  Avertisment privind condițiile de mediu! Risc major de sănătate pentru întreaga populație
                   </td>
 
                   </tr>
@@ -895,7 +895,7 @@ export default function CalitateAer() {
 
                   <td style = {{backgroundColor: '#ab0231'}}> 300+ </td>
                   <td> Periculos </td>
-                  <td> Alertă de sănătate. Întreaga populație va suferi efecte grave asupra sănătății.
+                  <td> Alertă de sănătate! Întreaga populație va suferi efecte grave asupra sănătății
                   </td>
             
 
