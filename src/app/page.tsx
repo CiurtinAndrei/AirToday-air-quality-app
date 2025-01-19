@@ -52,7 +52,7 @@ export default function Home(){
             <option value = "default" disabled></option>
             <option value="A470920">București - Sectorul 1</option>
             <option value="A109186">București - Sectorul 2</option>
-            <option value="A110290">București - Sectorul 3</option>
+            <option value="A417121">București - Sectorul 3</option>
             <option value="A109819">București - Sectorul 4</option>
             <option value="A109702">București - Sectorul 5</option>
             <option value="A109288">București - Sectorul 6</option>

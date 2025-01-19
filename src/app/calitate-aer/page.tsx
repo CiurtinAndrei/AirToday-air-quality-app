@@ -226,7 +226,7 @@ export default function CalitateAer() {
                   updateName("București - Sectorul 2")
                   break
                 }
-                case -110290:{
+                case -417121:{
                   updateName("București - Sectorul 3")
                   break
                 }
